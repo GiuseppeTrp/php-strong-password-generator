@@ -1,31 +1,6 @@
 <?php
-// Funzione per generare una password casuale
-function generateRandomPassword($length) {
-    // Caratteri utilizzati per generare la password casuale
-    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz@#$&*";
-    // Variabile per memorizzare la password generata
-    $password = '';
-    // Ciclo per generare la password carattere per carattere
-    for($i = 0; $i < $length; $i++) {
-        // Aggiunge un carattere casuale dalla stringa $chars alla password
-        $password .= $chars[rand(0, strlen($chars) )];
-    }
-    // Restituisce la password generata
-    return $password;
-}
-
-// Controlla se la lunghezza della password è stata specificata nel parametro GET
-if(isset($_GET['length'])) {
-    // Ottieni la lunghezza della password dalla richiesta GET
-    $passwordLength = $_GET['length'];
-    // Genera una password casuale utilizzando la funzione generateRandomPassword
-    $randomPassword = generateRandomPassword($passwordLength);
-} else {
-    // Imposta una lunghezza predefinita per la password se non è stata specificata nella richiesta GET
-    $passwordLength = 10; // Lunghezza predefinita
-    // Genera una password casuale di lunghezza predefinita
-    $randomPassword = generateRandomPassword($passwordLength);
-}
+// Include il file functions.php
+include 'functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +31,7 @@ if(isset($_GET['length'])) {
             <div class="row justify-content-center mt-5 text-white">
                 <div class="col-md-6">
                     <h2 class="text-center">Your random password:</h2>
-                    <p class=" password lead text-center fw-bold text-success bg-white rounded p-2"><?php echo $randomPassword; ?></p>
+                    <p class=" password lead text-center fw-bold text-success bg-white rounded p-3 overflow-auto"><?php echo $randomPassword; ?></p>
                 </div>
             </div>
         <?php } ?>
@@ -75,5 +50,18 @@ if(isset($_GET['length'])) {
         cursor:pointer;
         text-decoration: underline yellow;
     }
+    .password::-webkit-scrollbar {
+            height: 5px; /* Larghezza della barra di scorrimento */
+        }
+        .password::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Colore dello sfondo della barra di scorrimento */
+        }
+        .password::-webkit-scrollbar-thumb {
+            background: #888; /* Colore del cursore della barra di scorrimento */
+            border-radius: 5px; /* Rende i bordi del cursore arrotondati */
+        }
+        .password::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Cambia il colore del cursore della barra di scorrimento al passaggio del mouse */
+        }
 
 </style>
